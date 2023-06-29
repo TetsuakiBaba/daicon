@@ -492,30 +492,29 @@ class daicon {
         this.fontsize = parseInt(window.getComputedStyle(element).getPropertyValue('font-size'));
         this.color = window.getComputedStyle(element).getPropertyValue('color');
         this.size = {}
-        //console.log({ fontsize: this.fontsize, color: this.color });
         this.size.w = this.fontsize;
         this.size.h = this.fontsize;
         this.line_width = this.fontsize * 0.06;
         this.name = name;
         this.is_clipping = false;
+        console.log(this.name);
         this.createSVG(dom_key, options);
 
     }
 
-
-
     createSVG(dom_key, options = {}) {
-
         document.querySelector(`${dom_key}`).innerHTML = '';
-        const targetId = document.querySelector(dom_key).getAttribute('data-dc-id');
+        const targetId = this.name;//document.querySelector(dom_key).getAttribute('data-dc-id');
         const foundObject = json_daicons.find(obj => obj.id === targetId);
-
-
-        document.querySelector(dom_key).innerHTML = foundObject.html;
-        document.querySelector(dom_key).querySelector('svg').setAttribute('width', this.size.w);
-        document.querySelector(dom_key).querySelector('svg').setAttribute('height', this.size.w);
-        document.querySelector(dom_key).querySelector('path').setAttribute('fill', this.color);
-
+        if (foundObject) {
+            document.querySelector(dom_key).innerHTML = foundObject.html;
+            document.querySelector(dom_key).querySelector('svg').setAttribute('width', this.size.w);
+            document.querySelector(dom_key).querySelector('svg').setAttribute('height', this.size.w);
+            document.querySelector(dom_key).querySelector('path').setAttribute('fill', this.color);
+        }
+        else {
+            alert(`Daicon.js Error: "${this.name}" not found`)
+        }
     }
 
 
@@ -555,7 +554,7 @@ function loadDaiconTags(dom_daicon) {
             if (dom_daicon) e.id = dom_daicon.id;
             else e.id = `daicon_${id_count}`;
             //    console.log(e.id);
-            new daicon(`#${e.id}`);
+            new daicon(`#${e.id}`, name);
             id_count++;
         }
     }
