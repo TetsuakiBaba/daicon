@@ -4,7 +4,7 @@ Daicon.js (Digital Agency ICONs for javascrip) is a js library that makes it eas
 <img src="teaser.png">
 
 # Getting Started
-  * 
+  * https://tetsuakibaba.github.io/daicon/
 
 # Reference
  * "Illustration Icon Materials" (Digital Agency) (https://www.digital.go.jp/policies/servicedesign/designsystem/Illustration_Icons/
