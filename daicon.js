@@ -563,5 +563,5 @@ function loadDaiconTags(dom_daicon) {
 
 
 // 読み込むelemnetが少ないときは最終行呼び出しでもだいたい大丈夫
-//loadDaiconTags();
+loadDaiconTags();
 
