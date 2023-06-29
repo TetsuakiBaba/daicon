@@ -497,7 +497,6 @@ class daicon {
         this.line_width = this.fontsize * 0.06;
         this.name = name;
         this.is_clipping = false;
-        console.log(this.name);
         this.createSVG(dom_key, options);
 
     }
@@ -520,18 +519,18 @@ class daicon {
 
 }
 
-function addSVGElement(svg_width, svg_height, element_appended) {
-    let element = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    element.setAttribute('version', '1.1');
-    element.setAttribute('baseProfile', 'full');
-    element.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-    element.setAttribute('width', `${svg_width}`);
-    element.setAttribute('height', `${svg_height}`);
-    element.setAttribute('viewbox', `0 0 ${svg_width} ${svg_height}`)
-    // element.style.verticalAlign = '0.55em'; //svgキャンバスとテキストのズレ調整
-    element_appended.appendChild(element);
-    return element;
-}
+// function addSVGElement(svg_width, svg_height, element_appended) {
+//     let element = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+//     element.setAttribute('version', '1.1');
+//     element.setAttribute('baseProfile', 'full');
+//     element.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+//     element.setAttribute('width', `${svg_width}`);
+//     element.setAttribute('height', `${svg_height}`);
+//     element.setAttribute('viewbox', `0 0 ${svg_width} ${svg_height}`)
+//     element.style.verticalAlign = '-0.15em'; //svgキャンバスとテキストのズレ調整
+//     element_appended.appendChild(element);
+//     return element;
+// }
 
 
 function loadDaiconTags(dom_daicon) {
@@ -553,7 +552,6 @@ function loadDaiconTags(dom_daicon) {
             const fontsize = window.getComputedStyle(e).getPropertyValue('font-size');
             if (dom_daicon) e.id = dom_daicon.id;
             else e.id = `daicon_${id_count}`;
-            //    console.log(e.id);
             new daicon(`#${e.id}`, name);
             id_count++;
         }

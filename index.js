@@ -26,6 +26,7 @@ function createDaiconElements(json) {
             button1.setAttribute('data-clipboard-target', `#${p.id}_code`)
             button1.id = 'btn-copy';
 
+
             let p2 = buildElement('p', '', 'border card-text small p-2 mt-4 mb-0', 'font-size:0.1rem;', div2);
             // p2.hidden = true;
             p2.id = `${p.id}_svg`;
