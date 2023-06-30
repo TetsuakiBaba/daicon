@@ -27,7 +27,7 @@ function createDaiconElements(json) {
             button1.id = 'btn-copy';
 
 
-            div_grid = buildElement('div', '', 'd-grid  gap-2 d-md-flex justify-content-end', '', div2);
+            div_grid = buildElement('div', '', 'd-grid  gap-2 d-md-flex justify-content-md-end', '', div2);
             {
                 let button = buildElement('button', '<i data-dc-id="copy_line"></i> SVG', 'btn btn-light btn-sm', '', div_grid);
                 button.value = p.html;
