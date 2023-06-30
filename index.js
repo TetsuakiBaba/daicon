@@ -22,7 +22,7 @@ function createDaiconElements(json) {
             p1.id = `${p.id}_code`;
             p1.innerText = `<i data-dc-id="${p.id}"></i>`;
             let div_grid = buildElement('div', '', 'd-grid mb-4 gap-2 d-md-flex justify-content-md-end', '', div2);
-            let button1 = buildElement('button', 'copy', 'btn btn-secondary btn-sm', '', div_grid);
+            let button1 = buildElement('button', `<i data-dc-id="copy_line"></i>copy`, 'btn btn-secondary btn-sm', '', div_grid);
             button1.setAttribute('data-clipboard-target', `#${p.id}_code`)
             button1.id = 'btn-copy';
 
@@ -32,7 +32,7 @@ function createDaiconElements(json) {
             p2.id = `${p.id}_svg`;
             p2.innerText = p.html;
             div_grid = buildElement('div', '', 'd-grid mb-4 gap-2 d-md-flex justify-content-md-end', '', div2);
-            button2 = buildElement('button', 'copy', 'btn btn-secondary btn-sm', '', div_grid);
+            button2 = buildElement('button', '<i data-dc-id="copy_line"></i>copy', 'btn btn-secondary btn-sm', '', div_grid);
             button2.setAttribute('data-clipboard-target', `#${p.id}_svg`)
             button2.id = 'btn-copy';
 
