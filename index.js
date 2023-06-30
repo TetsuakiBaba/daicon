@@ -6,7 +6,7 @@ function createDaiconElements(json) {
 
     for (let p of json) {
         if (p.show) {
-            let div1 = buildElement('div', '', 'col-md-6 col-lg-4 col-xxl-3 mb-4', '', daicons_placeholder);
+            let div1 = buildElement('div', '', 'col-sm-6 col-md-4 col-lg-3 col-xxl-2 mb-4', '', daicons_placeholder);
             div1.id = `daicon_card_${p.id}`;
             let div_card = buildElement('div', '', 'card', '', div1);
             let div2 = buildElement('div', `<h6 class="card-subtitle text-muted">${p.id}</h6>`, 'card-body', '', div_card);
@@ -18,24 +18,29 @@ function createDaiconElements(json) {
             let div_row = buildElement('div', '', 'row g-1', '', div2);
 
 
-            let p1 = buildElement('p', '', 'border card-text small p-2 mt-4 mb-0', '', div2);
+            let p1 = buildElement('p', '', 'border card-text p-2 mt-4 mb-0 pe-4 small text-muted', 'font-size:0.6rem;', div2);
             p1.id = `${p.id}_code`;
             p1.innerText = `<i data-dc-id="${p.id}"></i>`;
-            let div_grid = buildElement('div', '', 'd-grid mb-4 gap-2 d-md-flex justify-content-md-end', '', div2);
-            let button1 = buildElement('button', `<i data-dc-id="copy_line"></i>copy`, 'btn btn-secondary btn-sm', '', div_grid);
+            let div_grid = buildElement('div', '', 'd-grid mb-2 gap-2 d-md-flex justify-content-end', 'margin-top:-2.05em;margin-right:0.1em;', div2);
+            let button1 = buildElement('button', `<i data-dc-id="copy_line"></i>`, 'btn btn-light btn-sm rounded-circle', '', div_grid);
             button1.setAttribute('data-clipboard-target', `#${p.id}_code`)
             button1.id = 'btn-copy';
 
 
-            let p2 = buildElement('p', '', 'border card-text small p-2 mt-4 mb-0', 'font-size:0.1rem;', div2);
-            // p2.hidden = true;
-            p2.id = `${p.id}_svg`;
-            p2.innerText = p.html;
-            div_grid = buildElement('div', '', 'd-grid mb-4 gap-2 d-md-flex justify-content-md-end', '', div2);
-            button2 = buildElement('button', '<i data-dc-id="copy_line"></i>copy', 'btn btn-secondary btn-sm', '', div_grid);
-            button2.setAttribute('data-clipboard-target', `#${p.id}_svg`)
-            button2.id = 'btn-copy';
-
+            div_grid = buildElement('div', '', 'd-grid  gap-2 d-md-flex justify-content-end', '', div2);
+            {
+                let button = buildElement('button', '<i data-dc-id="copy_line"></i> SVG', 'btn btn-light btn-sm', '', div_grid);
+                button.value = p.html;
+                button.setAttribute('data-clipboard-target', `#${p.id}_svg`)
+                button.id = 'btn-copy-svg';
+            }
+            {
+                let button = buildElement('button', '<i data-dc-id="download_line"></i> SVG', 'btn btn-light btn-sm', '', div_grid);
+                button.value = p.html;
+                button.setAttribute('filename', `${p.id}`)
+                button.setAttribute('data-clipboard-target', `#${p.id}_svg`)
+                button.id = 'btn-download-svg';
+            }
         }
         else {
 
@@ -123,17 +128,64 @@ function createDaiconElements(json) {
             }
 
             // Update button label
-            element.innerHTML = 'Copied!';
+            // element.innerHTML = 'Copied!';
             element.classList.replace('btn-secondary', 'btn-success');
 
             // Revert button label after 3 seconds
             setTimeout(function () {
                 element.innerHTML = currentLabel;
                 element.classList.replace('btn-success', 'btn-secondary');
-            }, 3000)
+            }, 1000)
         })
     }
 
+    es = document.querySelectorAll('#btn-copy-svg');
+    for (let element of es) {
+        element.addEventListener('click', function () {
+            const currentLabel = element.innerHTML;
+            copyToClipboard(element.value)
+            element.classList.replace('btn-secondary', 'btn-success');
+            // Revert button label after 3 seconds
+            setTimeout(function () {
+                element.innerHTML = currentLabel;
+                element.classList.replace('btn-success', 'btn-secondary');
+            }, 1000)
+        })
+    }
+
+    es = document.querySelectorAll('#btn-download-svg');
+    for (let element of es) {
+        element.addEventListener('click', function () {
+            const currentLabel = element.innerHTML;
+            copyToClipboard(element.value)
+            element.classList.replace('btn-secondary', 'btn-success');
+
+            // p2.id にsvgタグがある
+            let content = element.value;
+            let blob = new Blob([content], { "type": "image/svg+xml" });
+            let a = document.createElement('a');
+            a.href = window.URL.createObjectURL(blob);
+            a.setAttribute('download', `${element.getAttribute('filename')}.svg`);
+            a.click();
+
+            // Revert button label after 3 seconds
+
+            setTimeout(function () {
+                element.innerHTML = currentLabel;
+                element.classList.replace('btn-success', 'btn-secondary');
+            }, 1000)
+        })
+    }
+}
+
+// クリップボードAPIへのアクセスを許可する関数
+async function copyToClipboard(text) {
+    try {
+        await navigator.clipboard.writeText(text);
+        console.log(`'${text}' has been copied to clipboard`);
+    } catch (err) {
+        console.error('Failed to copy text: ', err);
+    }
 }
 
 window.addEventListener('DOMContentLoaded', function () {
