@@ -488,7 +488,16 @@ var json_daicons = [
 
 class daicon {
     constructor(dom_key, name, options = {}) {
-        let element = document.querySelector(dom_key);
+        let element;
+        // dom_keyがdocument oriented elementかどうか判定
+        if (dom_key instanceof HTMLElement) {
+            element = dom_key;
+            console.log(dom_key);
+        }
+        else {
+            element = document.querySelector(dom_key);
+        }
+
         this.fontsize = parseInt(window.getComputedStyle(element).getPropertyValue('font-size'));
         this.color = window.getComputedStyle(element).getPropertyValue('color');
         this.size = {}
@@ -502,14 +511,24 @@ class daicon {
     }
 
     createSVG(dom_key, options = {}) {
-        document.querySelector(`${dom_key}`).innerHTML = '';
+
+        let element;
+        if (dom_key instanceof HTMLElement) {
+            element = dom_key;
+        }
+        else {
+            element = document.querySelector(dom_key);
+        }
+
+        element.innerHTML = '';
         const targetId = this.name;//document.querySelector(dom_key).getAttribute('data-dc-id');
         const foundObject = json_daicons.find(obj => obj.id === targetId);
         if (foundObject) {
-            document.querySelector(dom_key).innerHTML = foundObject.html;
-            document.querySelector(dom_key).querySelector('svg').setAttribute('width', this.size.w);
-            document.querySelector(dom_key).querySelector('svg').setAttribute('height', this.size.w);
-            document.querySelector(dom_key).querySelector('path').setAttribute('fill', this.color);
+            element.innerHTML = foundObject.html;
+            element.querySelector('svg').setAttribute('width', this.size.w);
+            element.querySelector('svg').setAttribute('height', this.size.w);
+            element.querySelector('path').setAttribute('fill', this.color);
+            element.querySelector('svg').style.verticalAlign = '-0.10em';
         }
         else {
             alert(`Daicon.js Error: "${this.name}" not found`)

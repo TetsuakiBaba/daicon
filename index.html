@@ -78,9 +78,9 @@
         <div class="row" id="daicons">
 
         </div>
-        <h1 class="display-5 mt-4" id="quick_start">Quick start</h1>
+        <h1 class="display-5 mt-4" id="quick_start">Quick Start</h1>
         <div class="highlight">
-            <pre class="p-0 m-0"><code class="p-4 mb-0" id="quick_start_code">&lt;!doctype html&gt;
+            <pre class="p-0 m-0 rounded"><code class="p-4 mb-0" id="quick_start_code">&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 
 &lt;head&gt;
@@ -96,13 +96,14 @@
 
 &lt;/html&gt;</code></pre>
 
-            <div class="d-grid mb-4 gap-2 d-md-flex justify-content-md-end">
+            <div class="d-grid mb-4 gap-2 d-md-flex justify-content-md-end"
+                style="margin-top:-2.2em;margin-right:0.2em;">
                 <button class="btn btn-dark btn-sm">
                     <a class="text-white text-decoration-none"
                         href="https://stackblitz.com/edit/web-platform-3h8wur?file=index.html" target="_blank"><i
                             class="bi bi-lightning-fill"></i> try on stackblitz.com</a>
                 </button>
-                <button class="btn btn-secondary btn-sm" id="btn-copy" data-clipboard-target="#quick_start_code">
+                <button class="btn btn-light btn-sm" id="btn-copy" data-clipboard-target="#quick_start_code">
                     <i data-dc-id="copy_line"></i>copy</button>
             </div>
         </div>
@@ -110,10 +111,11 @@
 
         <h1 class="display-5 mt-4" id="CDN">CDN</h1>
         <div class="highlight">
-            <pre class="p-0 m-0"><code class="p-4 mb-0" id="cdn_code">&lt;script src=&quot;https://cdn.jsdelivr.net/gh/TetsuakiBaba/daicon@61541d7/daicon.js&quot; crossorigin=&quot;anonymous&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+            <pre class="p-0 m-0 rounded"><code class="p-4 mb-0" id="cdn_code">&lt;script src=&quot;https://cdn.jsdelivr.net/gh/TetsuakiBaba/daicon@61541d7/daicon.js&quot; crossorigin=&quot;anonymous&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
 </code></pre>
-            <div class="d-grid mb-4 gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-secondary btn-sm" id="btn-copy" data-clipboard-target="#cdn_code"><i
+            <div class="d-grid mb-4 gap-2 d-md-flex justify-content-md-end"
+                style="margin-top:-2.2em;margin-right:0.2em;">
+                <button class="btn btn-light btn-sm" id="btn-copy" data-clipboard-target="#cdn_code"><i
                         data-dc-id="copy_line"></i>copy</button>
             </div>
         </div>
@@ -122,39 +124,87 @@
         <p>Daicon itself has no methods to set color or size. Use css to specify size and color. A simple
             example is
             shown below.</p>
-        <div class="row">
-            <div class="col-6">
-                <div class="highlight">
-                    <pre class="p-0 m-0"><code class="p-4 mb-0" id="customize_code">&lt;div style=&quot;font-size:3em;color:coral&quot;&gt;
+        <div class="alert alert-light">
+            <div class="row">
+                <div class="col-6">
+                    <div class="highlight">
+                        <pre class="p-0 m-0 rounded"><code class="p-4 mb-0" id="customize_code">&lt;div style=&quot;font-size:3em;color:coral&quot;&gt;
 &lt;i data-dc-id=&quot;medicine_fill&quot; &gt;&lt;/i&gt; Capsule Corp.
 &lt;/div&gt;</code></pre>
-                    <div class="d-grid mb-4 gap-2 d-md-flex justify-content-md-end">
-                        <button class="btn btn-secondary btn-sm" id="btn-copy"
-                            data-clipboard-target="#customize_code"><i data-dc-id="copy_line"></i>copy</button>
+                        <div class="d-grid mb-4 gap-2 d-md-flex justify-content-md-end"
+                            style="margin-top:-2.2em;margin-right:0.2em;">
+                            <button class="btn btn-light btn-sm" id="btn-copy"
+                                data-clipboard-target="#customize_code"><i data-dc-id="copy_line"></i>copy</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <span class="badge rounded-pill text-bg-light">Result</span>
+                    <div style="font-size:3em;color:coral">
+                        <i data-dc-id="medicine_fill"></i>Capsule Corp.
+
                     </div>
                 </div>
             </div>
-            <div class="col-6">
-                <span class="badge rounded-pill text-bg-secondary">Result</span>
-                <div style="font-size:3em;color:coral">
-                    <i data-dc-id="medicine_fill"></i>Capsule Corp.
+        </div>
 
+        <!-- Via Javascript -->
+        <h1 class="display-5 mt-4" id="via_javascript">Via JavaScript</h1>
+        <p>Daicon can be created via JavaScript. The following is an example of creating a daicon with
+            JavaScript.</p>
+        <div class="container">
+            <div class="row gx-4">
+                <div class="col-md-6">
+                    <div class="alert alert-light">
+                        <div class="highlight">
+                            <pre
+                                class="p-0 m-0 rounded"><code class="p-4 mb-0" id="js_code">new daicon('#svg', 'me_fill'); </code></pre>
+                            <div class="d-grid mb-2 gap-2 d-md-flex justify-content-md-end"
+                                style="margin-top:-2.2em;margin-right:0.2em;">
+                                <button class="btn btn-light btn-sm" id="btn-copy" data-clipboard-target="#js_code"><i
+                                        data-dc-id="copy_line"></i>copy</button>
+                            </div>
+                        </div>
+                        <span class="badge text-bg-light">Result</span>
+                        <p id="svg"></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="alert alert-light">
+                        <div class="highlight">
+                            <pre class="p-0 m-0 rounded"><code class="p-4 mb-0" id="js_code02">for (let j of json_daicons) {
+    let element = document.createElement('span');
+    document.querySelector('#all_daicons_placeholder').appendChild(element);
+    new daicon(element, j.id);
+}</code></pre>
+                            <div class="d-grid mb-2 gap-2 d-md-flex justify-content-md-end"
+                                style="margin-top:-2.2em;margin-right:0.2em;">
+                                <button class="btn btn-light btn-sm" id="btn-copy" data-clipboard-target="#js_code02"><i
+                                        data-dc-id="copy_line"></i>copy</button>
+                            </div>
+                        </div>
+                        <span class="badge text-bg-light">Result</span>
+                        <p id="all_daicons_placeholder"></p>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <!-- display all icons in once-->
+        <script>
+            // 他のファイルの読み込みが終わったら
+            window.addEventListener('DOMContentLoaded', (event) => {
+                // すべてのアイコンを表示
+                for (let j of json_daicons) {
+                    let element = document.createElement('span');
+                    document.querySelector('#all_daicons_placeholder').appendChild(element);
+                    new daicon(element, j.id);
+                }
+                new daicon('#svg', 'me_fill');
 
-        <h1 class="display-5 mt-4" id="via_javascript">Via JavaScript</h1>
-        <p class="mt-4 mb-0">
-            Create a daicon with a single line of JavaScript;
-        </p>
-        <div class="highlight">
-            <pre class="p-0 m-0"><code class="p-4 mb-0" id="js_code">new daicon('#svg', 'me_fill'); </code></pre>
-            <div class="d-grid mb-2 gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-secondary btn-sm" id="btn-copy" data-clipboard-target="#js_code"><i
-                        data-dc-id="copy_line"></i>copy</button>
-            </div>
-        </div>
+            });
+
+        </script>
 
         <h1 class="display-5 mt-4">
             License
@@ -183,14 +233,9 @@
         </script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
-
-
         <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
         <script src="./daicon.js"></script>
         <script src="./index.js"></script>
-
-
-
         <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 
 </body>
