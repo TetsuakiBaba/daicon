@@ -4,6 +4,7 @@
  */
 
 var json_daicons = [
+
     {
         "id": "add_fill",
         "html": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<g clip-path=\"url(#clip0_320_187)\">\n<path d=\"M13.0008 10.9998V2.7998H11.0008V10.9998H2.80078V12.9998H11.0008V21.1998H13.0008V12.9998H21.2008V10.9998H13.0008Z\" fill=\"#1A1A1C\"/>\n</g>\n<defs>\n<clipPath id=\"clip0_320_187\">\n<rect width=\"24\" height=\"24\" fill=\"white\"/>\n</clipPath>\n</defs>\n</svg>\n"
@@ -492,7 +493,6 @@ class daicon {
         // dom_keyがdocument oriented elementかどうか判定
         if (dom_key instanceof HTMLElement) {
             element = dom_key;
-            console.log(dom_key);
         }
         else {
             element = document.querySelector(dom_key);
@@ -527,7 +527,11 @@ class daicon {
             element.innerHTML = foundObject.html;
             element.querySelector('svg').setAttribute('width', this.size.w);
             element.querySelector('svg').setAttribute('height', this.size.w);
-            element.querySelector('path').setAttribute('fill', this.color);
+            let paths = element.querySelectorAll('path');
+            for (let path of paths) {
+                path.setAttribute('fill', this.color);
+            }
+
             element.querySelector('svg').style.verticalAlign = '-0.10em';
         }
         else {

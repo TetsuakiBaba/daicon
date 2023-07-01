@@ -5,6 +5,45 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>daicon</title>
+    <!-- For old IEs -->
+    <link rel="shortcut icon" href="./images/favicons/favicon.ico" />
+
+    <!-- For new browsers - multisize ico  -->
+    <link rel="icon" type="image/x-icon" sizes="16x16 32x32" href="./images/favicons/favicon.ico">
+
+    <!-- For iPad with high-resolution Retina display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon" sizes="152x152" href="./images/favicons/favicon-152-precomposed.png">
+
+    <!-- For iPad with high-resolution Retina display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon" sizes="144x144" href="./images/favicons/favicon-144-precomposed.png">
+
+    <!-- For iPhone with high-resolution Retina display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon" sizes="120x120" href="./images/favicons/favicon-120-precomposed.png">
+
+    <!-- For iPhone with high-resolution Retina display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon" sizes="114x114" href="./images/favicons/favicon-114-precomposed.png">
+
+    <!-- For iPhone 6+ -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/favicons/favicon-180-precomposed.png">
+
+    <!-- For first- and second-generation iPad: -->
+    <link rel="apple-touch-icon" sizes="72x72" href="./images/favicons/favicon-72-precomposed.png">
+
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <link rel="apple-touch-icon" sizes="57x57" href="./images/favicons/favicon-57.png">
+
+    <!-- For Old Chrome -->
+    <link rel="icon" sizes="32x32" href="./images/favicons/favicon-32.png">
+
+    <!-- For IE10 Metro -->
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="./images/favicons/favicon-144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Chrome for Android -->
+    <link rel="manifest" href="./images/favicons/manifest.json">
+    <link rel="icon" sizes="192x192" href="./images/favicons/favicon-192.png">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <style>
@@ -13,6 +52,70 @@
             white-space: -pre-wrap;
             white-space: -o-pre-wrap;
             white-space: pre-wrap;
+        }
+
+        /* マウスオンする要素とツールチップを横並びにする */
+        .c-tooltip {
+            display: inline-block;
+            position: relative;
+        }
+
+        /* ツールチップ共通の設定 */
+        .c-tooltip::before,
+        .c-tooltip::after {
+            -webkit-transition: all 0.2s;
+            opacity: 0;
+            position: absolute;
+            transition: all 0.2s;
+            visibility: hidden;
+            z-index: 11;
+        }
+
+        /* ツールチップ吹き出しのひげ */
+        .c-tooltip::before {
+            -webkit-transform: translateY(-50%);
+            border-color: transparent #5f6368 transparent transparent;
+            border-style: solid;
+            border-width: 3px 7px 3px 0;
+            content: "";
+            height: 0;
+            left: calc(100% + 6px);
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+        }
+
+        /* ツールチップ吹き出しの本体 */
+        .c-tooltip::after {
+            -webkit-transform: translateY(-50%);
+            background: #5f6368;
+            border-radius: 3px;
+            color: #fff;
+            content: attr(data-tooltip);
+            /* ここでdata-tooltipの内容を呼び出しているよ */
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            left: calc(100% + 13px);
+            padding: 5px 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            white-space: nowrap;
+        }
+
+        /* マウスオンしたときのカーソルの設定 */
+        .c-tooltip:hover {
+            cursor: pointer;
+        }
+
+        .c-tooltip:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .c-tooltip:hover::after {
+            opacity: 1;
+            visibility: visible;
         }
     </style>
 
@@ -27,9 +130,16 @@
 
 <body>
     <div class="container-sm">
-        <h1 class="display-1 pt-5 mt-5">
-            Daicon
-        </h1>
+        <div class="row pt-5 mt-5 align-items-center">
+            <div class="col-sm-4 col-md-4 col-lg-3 col-xxl-3 mb-2">
+                <h1 class="display-1">
+                    Daicon
+                </h1>
+            </div>
+            <div id="daicon_teaser_placeholder" class="col-sm-8 col-md-8 col-lg-9 col-xxl-9 mb-2">
+
+            </div>
+        </div>
 
         <p class="lead">
             Daicon (Digital Agency ICONs for javascript) is a js library that makes it easier for front-end
@@ -45,6 +155,8 @@
 
         <iframe src="https://ghbtns.com/github-btn.html?user=TetsuakiBaba&repo=daicon&type=star&count=true&v=2"
             frameborder="0" scrolling="0" width="150" height="20" title="GitHub"></iframe>
+
+
         <ul class="nav justify-content-end">
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#quick_start">Quick Start</a>
@@ -202,9 +314,27 @@
                 }
                 new daicon('#svg', 'me_fill');
 
+
+                let mycolors = ['#B86969', '#BA8F60', '#BAB660', '#68BA60', '#60BABA', '#606CBA', '#BA60BA']
+                // display all icons in daicon_teaser_placeholder 
+                let color_pos = 0;
+                for (let j of json_daicons) {
+                    if (j.id.indexOf('fill') > 0) {
+                        let element = document.createElement('span');
+                        element.style.color = mycolors[color_pos];
+                        element.classList.add('c-tooltip');
+                        element.setAttribute('data-tooltip', j.id);
+                        document.querySelector('#daicon_teaser_placeholder').appendChild(element);
+                        new daicon(element, j.id);
+                        color_pos++;
+                        if (color_pos >= mycolors.length) color_pos = 0;
+                    }
+                }
             });
 
         </script>
+
+
 
         <h1 class="display-5 mt-4">
             License
